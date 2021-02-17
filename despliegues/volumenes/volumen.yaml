@@ -1,0 +1,28 @@
+####        ADMINISTRADOR
+#### #### #### #### #### #### #### 
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mi-volumen-1
+spec:
+    storageClassName: rapido
+    capacity: 
+      storage: 200Mi
+    accessModes:
+      - ReadWriteOnce
+    hostPath: 
+      path: /volumenes/vol1
+    
+#      - ReadOnlyMany
+#      - ReadWriteMany
+    
+    # tipo de volumen:
+      # Hay un Monton
+    #    - AZURE
+    #    - AMAZON
+    #    - GCLOUD
+    #    - CEPH
+    #    - CINDER
+    #    - NFS
+        
+---

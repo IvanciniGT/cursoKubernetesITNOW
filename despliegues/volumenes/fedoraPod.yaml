@@ -29,6 +29,11 @@ spec:
                 configMapKeyRef:
                     name: mi-configuracion
                     key: VAR_ENT_1
+            - name: VAR2
+              valueFrom: 
+                secretKeyRef:
+                    name: mi-secreto
+                    key: password
         volumeMounts:
 
             - name: local-indeterminado
@@ -37,6 +42,10 @@ spec:
               mountPath: /ram
             - name: volumen-configmap
               mountPath: /configuracion
+            - name: volumen-secreto
+              mountPath: /secreto
+            - name: persistente
+              mountPath: /persistente
     volumes:
         - name: local
           hostPath:
@@ -68,5 +77,15 @@ spec:
         - name: volumen-configmap
           configMap:
             name: mi-configuracion
+
+        - name: volumen-secreto
+          secret:
+            secretName: mi-secreto
+
             # Volumenes persistentes: Aquí no....
+            # Espacio de almacenamiento PRERESERVADO EN EL CLUSTER, que se puede asignar a un pod
+        
             # Qué definimos aquí? Peticiones de volumen persistente
+        - name: persistente
+          persistentVolumeClaim:
+            claimName: mi-peticion-volumen-1

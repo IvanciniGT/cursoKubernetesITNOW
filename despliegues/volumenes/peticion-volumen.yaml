@@ -1,0 +1,13 @@
+####        DESARROLLADOR
+#### #### #### #### #### #### #### 
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mi-peticion-volumen-1
+spec:
+    storageClassName: rapido
+    resources: 
+      requests:
+        storage: 23Mi
+    accessModes:
+      - ReadWriteOnce
