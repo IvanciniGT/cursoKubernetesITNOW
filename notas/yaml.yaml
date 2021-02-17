@@ -1,0 +1,42 @@
+# En yaml podemos comentar una linea poniendo un # delante
+# En un unico fichero yaml, podemos tener varios documentos yaml
+---
+# Unos documentos comienza con        ---
+# Los documentos pueden acabar con    ...
+...
+---
+
+Un documento YAML lo conforma un objeto
+
+---
+Podemos tener objetos de ditinta naturales:
+    - texto
+    - 123 # numero
+    - 3.11
+    - 0x12
+    - 3.23e14
+    - # fecha patron ISO
+...
+---
+- item1
+- item2
+---
+Listas:
+    - item 1
+    - item 2
+---
+Mapas de valores:   
+    clave: 
+        - valor1 
+        - valor2
+    clave2: valor
+---
+Textos multilinea: |
+                    Si quiero poner un texto
+                    que ocupe varias lineas
+# Al procesar el valor, se mantienen los saltos de linea
+---
+Textos multilinea: >
+                    Si quiero poner un texto
+                    que ocupe varias lineas
+# Al procesar el valor, se eliminan los saltos de linea y se sustituyen por espacios en blanco

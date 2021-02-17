@@ -1,0 +1,72 @@
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-fedora
+spec:
+    containers:
+      - name: contenedor-fedora-1
+        image: fedora:latest
+        command: ['sh','-c','sleep 3600;']
+        volumeMounts:
+
+            - name: local
+              mountPath: /local
+            - name: local-indeterminado
+              mountPath: /compartida
+            - name: local-indeterminado-2
+              mountPath: /ram
+
+      - name: contenedor-fedora-2
+        image: fedora:latest
+        command: ['sh','-c','sleep 3600;']
+        env:
+            - name: VAR1
+              value: "Soy el valor de la variable de entorno"
+            - name: VAR2
+              valueFrom: 
+                configMapKeyRef:
+                    name: mi-configuracion
+                    key: VAR_ENT_1
+        volumeMounts:
+
+            - name: local-indeterminado
+              mountPath: /compartido
+            - name: local-indeterminado-2
+              mountPath: /ram
+            - name: volumen-configmap
+              mountPath: /configuracion
+    volumes:
+        - name: local
+          hostPath:
+                path: /tmp/volumen-local   # Ruta en el host?
+                type: DirectoryOrCreate
+                        # File
+                        # DirectoryOrCreate
+                        # FileOrCreate
+                # Tiene este volumen algún sentido?
+                    # Problemas?
+                        # Los archivos están en los propios nodos. Si un nodo cae ??? RUINA !!!
+                        # Le dejo a un desarrollador que cree directorios / archivos en el host??? Desde cuando
+                    # Qué uso tiene esto?
+                        # Básicamente esto se usa con un único volumen: 
+                        # path: /var/lib/docker/
+                            # Esto monta la carpeta de docker dentro del contenedor:
+                                # Docker in docker: Que dentro de un contenedor se pueda crear un contenedor
+        - name: local-indeterminado
+          emptyDir: {}
+            # Una carpeta que se va a crear en local, no se donde... ni me interesa...
+            # La unica utilidad es poderla compartir entre 2 contenedores en un mismo pod
+        - name: local-indeterminado-2
+          emptyDir: 
+            medium: Memory
+                # Apache, nginx, weblogic --> Log --> Elasticsearch
+                #                                ^ No tiene persistencia en local
+                #                                       Puedo configurar un archivo de log muy pequeño.
+
+        - name: volumen-configmap
+          configMap:
+            name: mi-configuracion
+            # Volumenes persistentes: Aquí no....
+            # Qué definimos aquí? Peticiones de volumen persistente

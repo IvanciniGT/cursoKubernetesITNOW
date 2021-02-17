@@ -1,0 +1,13 @@
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mi-configuracion
+data:
+    VAR_ENT_1: valor1
+    base_datos.properties: |
+        user=Ivan
+        password=Password
+        bd_name=MI_BBDD
+        db_server:192.123.123.23
+---
