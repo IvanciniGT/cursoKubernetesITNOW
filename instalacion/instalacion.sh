@@ -15,9 +15,11 @@ sudo kubeadm config images pull
 sudo vim /etc/hosts
 ping micluster
 sudo kubeadm init   --pod-network-cidr=192.168.0.0/16   --control-plane-endpoint=micluster
+
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
 kubectl cluster-info
 kubectl get pods --all-namespaces
 kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
