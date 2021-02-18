@@ -16,8 +16,7 @@ spec:
             cpu: "500m" 
           defaultRequest:
             cpu: "400m"
-          type: Container
-        - max:
+          max:
             cpu: "600m"
           min:
             cpu: "200m"
